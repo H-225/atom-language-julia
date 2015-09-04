@@ -167,14 +167,18 @@ repository:
       }
       {
         match: "\\b(?<![:_])(?:global|local|const|export|import|importall|using)\\b"
-        name: "storage.modifier.variable.julia"
+        name: "storage.modifier.julia"
       }
       {
         match: "(@[[:alpha:]_][[:word:]!]*)(?=[ (])"
         name: "support.function.macro.julia"
       }
       {
-        match: "[[:alpha:]_][[:word:]!]*"
+        match: "(?<!:)[[:alpha:]_][[:word:]!]*(?=(, *(?<!:)[[:alpha:]_][[:word:]!]*)* *=)"
+        name: "variable.assignment.julia"
+      }
+      {
+        match: "(?<!:)[[:alpha:]_][[:word:]!]*"
         name: "support.identifier.julia"
       }
       {
