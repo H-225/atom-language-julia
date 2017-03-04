@@ -113,6 +113,9 @@
   "primitive type":
     prefix: "pt"
     body: 'primitive type ${1:name} ${2:number_of_bits} end'
+  "abstract type":
+    prefix: "at"
+    body: 'abstract type ${1:name} end'
   "while":
     prefix: "wh"
     body: '''
