@@ -388,3 +388,24 @@ describe "Julia grammar", ->
     expect(tokens[13]).toEqual value: ' ',   scopes:  ["source.julia"]
     expect(tokens[14]).toEqual value: '|>',  scopes:  ["source.julia", "keyword.operator.applies.julia"]
     expect(tokens[15]).toEqual value: ' sum', scopes:  ["source.julia"]
+
+  it "struct keywords", ->
+    {tokens} = grammar.tokenizeLine('struct X end')
+    expect(tokens[0]).toEqual value: 'struct', scopes: ['source.julia', 'keyword.other.julia']
+    expect(tokens[1]).toEqual value: ' X ', scopes: ['source.julia']
+    expect(tokens[2]).toEqual value: 'end', scopes: ['source.julia', 'keyword.control.end.julia']
+
+  it "mutable struct keywords", ->
+    {tokens} = grammar.tokenizeLine('mutable struct X end')
+    expect(tokens[0]).toEqual value: 'mutable', scopes: ['source.julia', 'keyword.other.julia']
+    expect(tokens[2]).toEqual value: 'struct', scopes: ['source.julia', 'keyword.other.julia']
+    expect(tokens[3]).toEqual value: ' X ', scopes: ['source.julia']
+    expect(tokens[4]).toEqual value: 'end', scopes: ['source.julia', 'keyword.control.end.julia']
+
+  it "primitive keyword", ->
+    {tokens} = grammar.tokenizeLine('primitive type X 32 end')
+    expect(tokens[0]).toEqual value: 'primitive', scopes: ['source.julia', 'keyword.other.julia']
+    expect(tokens[2]).toEqual value: 'type', scopes: ['source.julia', 'keyword.other.julia']
+    expect(tokens[3]).toEqual value: ' X ', scopes: ['source.julia']
+    expect(tokens[4]).toEqual value: '32', scopes: ['source.julia', 'constant.numeric.julia']
+    expect(tokens[6]).toEqual value: 'end', scopes: ['source.julia', 'keyword.control.end.julia']

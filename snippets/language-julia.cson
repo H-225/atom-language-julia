@@ -96,13 +96,23 @@
       	$2
       end
     '''
-  "type":
-    prefix: "t"
+  "struct":
+    prefix: "sc"
     body: '''
-      type ${1:name}
-      	${1:fields}
+      struct ${1:name}
+      	${2:fields}
       end
     '''
+  "mutable struct":
+    prefix: "sm"
+    body: '''
+      mutable struct ${1:name}
+      	${2:fields}
+      end
+    '''
+  "primitive type":
+    prefix: "pt"
+    body: 'primitive type ${1:name} ${2:number_of_bits} end'
   "while":
     prefix: "wh"
     body: '''
